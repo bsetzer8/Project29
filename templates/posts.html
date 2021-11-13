@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<nav>
+<a href="{{ url_for('index') }}"> Home</a> ||
+<a href="{{ url_for('get_posts') }}"> My Posts</a> ||
+<a href="{{ url_for('new_note') }}"> Add Post</a>
+</nav>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Question and Answer App">
+        <title>Question and Answer App - View your Posts</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
+    <body>
+	
+	<h1>Welcome to Your Posts.</h1>	
+
+        <h1>Listing Posts</h1>
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+            </tr>
+            {% for note in notes %}
+            <tr>
+                <td><a href="{{ url_for('get_note', note_id=note.id) }}">{{ note.title }}</a></td>
+                <td>{{ note.date }}</td>
+		<td><a href="{{ url_for('update_note', note_id=note.id) }}">Edit</a></td>
+		<td>
+		    <form action="{{ url_for('delete_note', note_id=note.id) }}" method="post">
+			<input type="submit" value="Delete">
+		    </form>
+		</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
