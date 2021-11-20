@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <nav>
+	{% if user %}
+	    <nav>
+		<a href="{{ url_for('logout') }}">Logout</a>
+	    </nav>
+	{% else %}
+	    <nav>
+		<a href="{{ url_for('login') }}">Sign In</a> ||
+		<a href="{{ url_for('register') }}">Register</a>
+	    </nav>
+	{% endif %}
 <a href="{{ url_for('index') }}"> Home</a> ||
 <a href="{{ url_for('get_posts') }}"> My Posts</a>
 </nav>
